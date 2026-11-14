@@ -82,6 +82,20 @@ Key findings:
 
 **Implication**: cheaper long-context inference without model changes.
 
+### 2.12 colibri (MoE streaming engine, 51k stars)
+
+colibri runs 100B–2.8T MoE models on consumer hardware by keeping the dense part in RAM and streaming routed experts from disk.
+
+Key techniques:
+- **Expert streaming with LRU cache**: only active experts in RAM; rest read from disk on demand.
+- **GPU backends**: CPU, Vulkan (any GPU), CUDA (NVIDIA). Dense chain on GPU.
+- **GGUF import**: reads published GGUFs as-is (IQ1_S to BF16).
+- **Hardware detection + recommendation**: setup wizard picks model based on RAM/disk/CPU/GPU.
+- **MCP server**: AI assistants can drive setup via Model Context Protocol.
+- **Measured**: GLM-5.2 (744B) at 9 tok/s on 6x RTX 5090; DeepSeek V4 Flash (284B) at 1.5 tok/s on RTX 5080.
+
+**Implication**: this is the most mature open engine for "large model in small memory". Our project can adopt its hardware detection, GGUF import, and expert streaming patterns.
+
 ### 2.11 SSMs / Mamba / RWKV (constant-memory architectures)
 
 - Transformers: KV cache grows linearly with context (16 GB for 8B @ 128K).
