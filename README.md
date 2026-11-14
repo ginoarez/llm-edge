@@ -1,7 +1,7 @@
-# edge-qwen-slo
+# llm-edge
 
-![ci](https://img.shields.io/github/actions/workflow/status/ginoarez/edge-qwen-slo/ci.yml?branch=main)
-![license](https://img.shields.io/github/license/ginoarez/edge-qwen-slo)
+![ci](https://img.shields.io/github/actions/workflow/status/ginoarez/llm-edge/ci.yml?branch=main)
+![license](https://img.shields.io/github/license/ginoarez/llm-edge)
 ![python](https://img.shields.io/badge/python-3.11%2B-blue)
 ![vram](https://img.shields.io/badge/VRAM-2--24GB-blue)
 
@@ -209,7 +209,7 @@ Before shipping a new quantization or speculative config:
 ## 8. Project structure
 
 ```
-edge-qwen-slo/
+llm-edge/
 ├── .github/workflows/ci.yml
 ├── app/                          # FastAPI gateway + metrics
 ├── hardware/                     # Hardware profiler
