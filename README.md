@@ -8,10 +8,7 @@
 **Hardware-agnostic LLM edge lab.**  
 Goal: find the best (model + quantization + runtime + speculative decoding + adaptation) for **any** VRAM budget, from 2 GB to 24 GB+, with reproducible benchmarks and quality gates.
 
-Inspired by **Agentic ESOpt** (gradient-free, inference-level-memory adaptation), this project also explores recovering quality after aggressive quantization.
-
-> This project is intentionally different from training-focused toolkits (e.g. Soup).  
-> Focus here is **low-latency edge inference**: quantization, speculative decoding, KV-cache discipline, and observability.
+This project explores recovering quality after aggressive quantization for low-latency edge inference.
 
 ---
 
