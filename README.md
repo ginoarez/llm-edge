@@ -138,11 +138,19 @@ Environment variables:
 
 ## 5. Benchmarking
 
-Single config:
+Single config (Ollama):
 
 ```powershell
-python benchmark.py --model qwen3:1.7b --runs 5 --num-predict 256
+python benchmark.py --backend ollama --model qwen3:1.7b --runs 5 --num-predict 256 --num-ctx 4096
 ```
+
+llama.cpp (OpenAI-compatible, for DFlash/EAGLE-3):
+
+```powershell
+python benchmark.py --backend llamacpp --model qwen3:4b --host http://127.0.0.1:8080 --runs 5
+```
+
+Now measures real TTFT (streaming) and VRAM peak. SLO requires tok/s ≥ 100, TTFT ≤ 500ms, VRAM ≤ 7.5GB.
 
 Systematic matrix:
 
