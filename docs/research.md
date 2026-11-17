@@ -82,6 +82,22 @@ Key findings:
 
 **Implication**: cheaper long-context inference without model changes.
 
+### 2.13 Edge0 (streaming MoE, latent MoE, trained routing prediction)
+
+Edge0 runs 145B/120B latent-MoE models on consumer hardware with SSD streaming and trained routing prediction.
+
+Key techniques:
+- **Latent MoE**: compresses expert inputs (latent width 1792/1280), attention stays full width. Routes 10 of 512 experts + 1 shared.
+- **Trained routing prediction**: router predicts next-layer experts, enabling prefetch. Paper: arXiv 2609.18063.
+- **Memory controls**: `--vram-reserve-mib`, `--expert-cache`, `--kv-resident`, `--spec` (MTP verify window), `--resident-budget-gib`, `--mmap-experts`.
+- **Expert residency**: disjoint VRAM/RAM expert sets, nothing counted twice.
+- **MTP speculation**: verify window (default 4 tokens).
+- **KV resident**: KV cells in VRAM, rest streams from pinned host RAM.
+- **Prefill borrow / conv cache**: memory-saving options.
+- **Native 4-bit training**: Q3_K and NVFP4.
+
+**Implication**: trained routing prediction is the next step beyond LRU/prefetch—predict, don't just react. Combined with latent MoE, enables 100B+ models on single GPU.
+
 ### 2.12 colibri (MoE streaming engine, 51k stars)
 
 colibri runs 100B–2.8T MoE models on consumer hardware by keeping the dense part in RAM and streaming routed experts from disk.
